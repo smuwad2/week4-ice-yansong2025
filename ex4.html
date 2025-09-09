@@ -1,19 +1,21 @@
 <html>
-
 <head>
    <title>Event Handling</title>
+   <style>
+      button.delete {
+         margin-left: 10px;
+      }
+   </style>
 </head>
-
 <body>
-
    <h1>Shopping List</h1>
    <p>Get it done today</p>
 
    <input type="text" id="inputText">
-   <!-- add a button here for adding new item -->
+   <button onclick="addItem()">Enter</button>
 
    <ul>
-      <li>Notebook<!--<button>Delete</button></li>-->
+      <li>Notebook</li>
       <li>Jello</li>
       <li>Spinach</li>
       <li>Rice</li>
@@ -22,11 +24,37 @@
    </ul>
 
    <script>
+      const ul = document.querySelector("ul");
 
-      // add code here
+      // helper: attach delete button to a <li>
+      function attachDeleteButton(li) {
+         let delBtn = document.createElement("button");
+         delBtn.textContent = "Delete";
+         delBtn.classList.add("delete");
+         delBtn.addEventListener("click", function () {
+            li.remove();
+         });
+         li.appendChild(delBtn);
+      }
 
+      // add new item
+      function addItem() {
+         let item = document.getElementById("inputText").value;
+         if (item === "") return;
+
+         let li = document.createElement("li");
+         li.textContent = item;
+         attachDeleteButton(li);
+
+         ul.appendChild(li);
+         document.getElementById("inputText").value = "";
+      }
+
+      // add delete buttons to all existing <li>
+      window.onload = function () {
+         let items = ul.querySelectorAll("li");
+         items.forEach(attachDeleteButton);
+      }
    </script>
-
 </body>
-
 </html>
