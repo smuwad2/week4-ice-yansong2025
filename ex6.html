@@ -17,6 +17,20 @@
     <ul id="shopList"></ul>
 
     <script>
+        const select = document.getElementById("select_item");
+        // attach event 
+        select.addEventListener("change", addItem);
+
+        function addItem() {
+         let item = select.value;
+         if (item === "") return;
+
+         let li = document.createElement("li");
+         li.textContent = item;
+         
+         let ul_list = document.getElementById("shopList");
+         ul_list.appendChild(li);
+      }
         
         // add code here
         
